@@ -74,6 +74,7 @@ def read_nobel_laureates(file_path: str, fields: List[str]) -> pd.DataFrame:
     
     return out_df
 
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Process Nobel laureates data file')

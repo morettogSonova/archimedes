@@ -26,6 +26,9 @@ def read_from_owid(file_path: str, metric_in: str, metric_out: str) -> pd.DataFr
     # Rename columns for consistency
     df.rename(columns={'Year': 'YEAR', 'Code': 'COUNTRYCODE', metric_in: metric_out}, inplace=True)
 
+    # Remove rows where COUNTRYCODE is not length 3
+    df = df[df['COUNTRYCODE'].apply(lambda x: isinstance(x, str) and len(x) == 3)]
+
     return df[['COUNTRYCODE', 'YEAR', metric_out]]
 
 

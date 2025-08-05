@@ -1,4 +1,4 @@
-Country,Year,AluminiumProduction,BauxiteProduction,CopperProduction,GoldProduction,HeightGini,Height,IronOreProduction,LeadProduction,ManganeseProduction,NickelProduction,SilverProduction,TinProduction,TungstenProduction,ZincProduction
+COUNTRYCODE,YEAR,AluminiumProduction,BauxiteProduction,CopperProduction,GoldProduction,HeightGini,Height,IronOreProduction,LeadProduction,ManganeseProduction,NickelProduction,SilverProduction,TinProduction,TungstenProduction,ZincProduction
 AFG,1870,,,,,,168.4,,,,,,,,
 AFG,1880,,,,,42.8383,165.69,,,,,,,,
 AFG,1930,,,,,37.783,166.8,,,,,,,,

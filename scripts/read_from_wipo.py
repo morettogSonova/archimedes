@@ -16,19 +16,25 @@ def read_from_wipo(file_path: str) -> pd.DataFrame:
     """
     # Read the WIPO file into a DataFrame
     df = pd.read_csv(file_path)
-    out_df = pd.DataFrame()
     
     # Convert country codes to names using country_converter
-    out_df['COUNTRYCODE'] = df['office_code'].apply(lambda x: tolerant_country_code_conversion(x))
-    out_df['PATENTFILINGS'] = df['filings']
-    out_df['YEAR'] = df['filing_year']
+    df['COUNTRYCODE_OFFICE'] = df['office_code'].apply(lambda x: tolerant_country_code_conversion(x))
+    df['COUNTRYCODE_ORIGIN'] = df['origin_code'].apply(lambda x: tolerant_country_code_conversion(x))
+    df['PATENTFILINGS'] = df['filings']
+    df['YEAR'] = df['filing_year']
 
-    out_df = out_df.groupby(['COUNTRYCODE', 'YEAR'], as_index=False)['PATENTFILINGS'].sum()
-    out_df = out_df.rename(columns={'COUNTRYCODE': 'COUNTRYCODE', 'PATENTFILINGS': 'PATENTFILINGS', 'YEAR': 'YEAR'})
-
-    return out_df
-
-
+    # Group by office and sum filings
+    office_grouped = df.groupby(['COUNTRYCODE_OFFICE', 'YEAR'])['PATENTFILINGS'].sum().reset_index()
+    office_grouped = office_grouped.rename(columns={'COUNTRYCODE_OFFICE': 'COUNTRYCODE', 'PATENTFILINGS': 'FILINGSOFFICE'})
+    
+    # Group by origin and sum filings
+    origin_grouped = df.groupby(['COUNTRYCODE_ORIGIN', 'YEAR'])['PATENTFILINGS'].sum().reset_index()
+    origin_grouped = origin_grouped.rename(columns={'COUNTRYCODE_ORIGIN': 'COUNTRYCODE', 'PATENTFILINGS': 'FILINGSORIGIN'})
+    
+    # Merge the two grouped datasets
+    result_df = pd.merge(office_grouped, origin_grouped, on=['COUNTRYCODE', 'YEAR'], how='outer')
+    
+    return result_df
 
 
 if __name__ == "__main__":

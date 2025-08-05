@@ -479,6 +479,25 @@ files = [
 test = ["pytest"]
 
 [[package]]
+name = "country-converter"
+version = "1.3.1"
+description = "The country converter (coco) - a Python package for converting country names between different classifications schemes"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "country_converter-1.3.1-py3-none-any.whl", hash = "sha256:c2372794d7ac1dcc88b7ba4ee0c6fc9f195cb3e6c04468a0ea4c4c005ccd6b32"},
+    {file = "country_converter-1.3.1.tar.gz", hash = "sha256:004881906fd3a3d92fa74f55144a66a28923f9b606e44ca2b9fa6aaaa884db94"},
+]
+
+[package.dependencies]
+pandas = ">=1.0"
+
+[package.extras]
+dev = ["ipykernel", "ipython", "jupyterlab (==3.*)", "jupytext", "pdbpp", "poethepoet", "pynvim"]
+test = ["coveralls", "pytest (>=5.4.0)", "pytest-cov (>=2.7.0)", "pytest-datadir", "pytest-mypy", "pytest-ruff (>=0.5)", "pytest-xdist[psutil]"]
+
+[[package]]
 name = "debugpy"
 version = "1.8.15"
 description = "An implementation of the Debug Adapter Protocol for Python"
@@ -2769,4 +2788,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10"
-content-hash = "4a1e71c9bf9188251abb4118988a43c845bf81729c65b38b269cb385cd1b1ce2"
+content-hash = "00bf1839498bb60ac5e184e657152265243e9619034fc5a9ab855c1e14f4ef8c"

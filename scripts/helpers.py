@@ -19,3 +19,16 @@ def tolerant_country_code_conversion(country_code: str) -> str:
     elif country_code == 'OA':
         return 'AFR'
     return coco.convert(country_code, to='ISO3', not_found=None)
+
+
+def tolerant_country_name_to_code_conversion(country_name: str) -> str:
+    """
+    Converts a country name to its ISO3 equivalent, returning None if not found.
+    """
+    if country_name == 'Austria-Hungary':
+        return 'AUT'
+    if country_name == 'West Germany':
+        return 'DEU'
+    if country_name == 'U.S.S.R.':
+        return 'RUS'
+    return coco.convert(country_name, to='ISO3', not_found=None)

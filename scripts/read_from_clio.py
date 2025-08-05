@@ -9,8 +9,11 @@ import matplotlib.pyplot as plt
 # Data Functions
 
 def convert_clio_to_longform(file_name):
+    print(f"Converting {file_name} to long form")
     df = pd.read_excel(file_name)
     name = file_name.split('/')[-1].split('_')[0]
+    df = df[df['ccode'].between(1, 1000)]
+    df['ccode'] = pd.to_numeric(df['ccode'], errors='coerce').astype('Int64')
     df['Country'] = df['ccode'].apply(lambda x: coco.convert(names=x, to="ISO3"))
     df = df.drop(columns=['ccode', 'country name'])
     df_long = df.set_index('Country').stack().reset_index()
@@ -54,7 +57,7 @@ def plot_metric(df, countries, metric):
 
 def main():
     # Step 0: Collect file locations
-    folder = '../data/in/clio'
+    folder = '../data/in/clio/New'
     file_locations = import_files(folder)
 
 
@@ -65,7 +68,7 @@ def main():
     from functools import reduce
     merged_df = reduce(lambda left, right: merge_datasets(left, right), dfs)
 
-    merged_df.to_csv("all_clio_data.csv", index=False)
+    merged_df.to_csv("all_clio_data_pt2.csv", index=False)
     
 
 

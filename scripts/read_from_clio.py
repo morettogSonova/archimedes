@@ -54,7 +54,7 @@ def plot_metric(df, countries, metric):
 
 def main():
     # Step 0: Collect file locations
-    folder = '/data/in/clio'
+    folder = 'data/in/clio'
     file_locations = import_files(folder)
 
 

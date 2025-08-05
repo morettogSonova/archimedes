@@ -23,6 +23,9 @@ def read_from_wipo(file_path: str) -> pd.DataFrame:
     out_df['PATENTFILINGS'] = df['filings']
     out_df['YEAR'] = df['filing_year']
 
+    out_df = out_df.groupby(['COUNTRYCODE', 'YEAR'], as_index=False)['PATENTFILINGS'].sum()
+    out_df = out_df.rename(columns={'COUNTRYCODE': 'COUNTRY', 'PATENTFILINGS': 'PATENTFILINGS', 'YEAR': 'YEAR'})
+
     return out_df
 
 

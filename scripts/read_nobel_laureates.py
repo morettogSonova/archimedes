@@ -58,13 +58,13 @@ def read_nobel_laureates(file_path: str, fields: List[str]) -> pd.DataFrame:
 
     out_df = pd.DataFrame()
     out_df['YEAR'] = df['year']
-    out_df['COUNTRY'] = df['isocode']
+    out_df['COUNTRYCODE'] = df['isocode']
     # Group by year and country, count the number of laureates, and reset index to get a DataFrame
     laureate_counts = df.groupby(['year', 'isocode']).size().reset_index(name='count')
     
     # Merge the counts back to out_df
     out_df = out_df.merge(laureate_counts[['year', 'isocode', 'count']], 
-                         left_on=['YEAR', 'COUNTRY'], 
+                         left_on=['YEAR', 'COUNTRYCODE'], 
                          right_on=['year', 'isocode'],
                          how='left')
     
@@ -73,6 +73,7 @@ def read_nobel_laureates(file_path: str, fields: List[str]) -> pd.DataFrame:
     out_df = out_df.drop(['year', 'isocode', 'count'], axis=1)
     
     return out_df
+
 
 if __name__ == "__main__":
 

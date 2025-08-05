@@ -32,3 +32,23 @@ def tolerant_country_name_to_code_conversion(country_name: str) -> str:
     if country_name == 'U.S.S.R.':
         return 'RUS'
     return coco.convert(country_name, to='ISO3', not_found=None)
+
+
+def tolerant_region_conversion(region_name: str) -> str:
+    """
+    Converts a region name to its ISO3 equivalent, returning None if not found.
+    """
+    code = {"Africa": "AFR",
+            "Asia": "ASI",
+            "Europe": "EUR",
+            "North America": "AMN",
+            "Oceania": "OCE",
+            "South America": "AMS"}
+    if region_name in code.keys():
+        return code[region_name]
+    
+    #Check if the region name is already in ISO3 format
+    region_name = region_name.strip()
+    if len(region_name) == 3:
+        return region_name
+    return coco.convert(region_name, to='ISO3', not_found=None)
